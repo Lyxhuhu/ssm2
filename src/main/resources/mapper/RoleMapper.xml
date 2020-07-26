@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lyx.dao.IRoleDao">
+    <select id="findRoleIdsByUserId" parameterType="int" resultType="int">
+        select roleId from user_role where userId=#{id}
+    </select>
+    <select id="findNotRoleByUserId" parameterType="int" resultType="role">
+        select * from tb_role where id not in(select roleId from user_role where userId=#{id})
+    </select>
+    <insert id="addRole" parameterType="UserRole">
+        insert into user_role(userId,roleId) values (#{userId},#{roleId})
+    </insert>
+    
+</mapper>
